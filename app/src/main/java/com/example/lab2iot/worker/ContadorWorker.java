@@ -1,4 +1,4 @@
-package com.example.lab2iot;
+package com.example.lab2iot.worker;
 
 import android.content.Context;
 import android.util.Log;

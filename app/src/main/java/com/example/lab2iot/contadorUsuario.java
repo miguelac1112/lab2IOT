@@ -11,6 +11,7 @@ import android.util.Log;
 import android.widget.TextView;
 
 import com.example.lab2iot.databinding.ActivityMainBinding;
+import com.example.lab2iot.worker.ContadorWorker;
 
 import java.util.UUID;
 
