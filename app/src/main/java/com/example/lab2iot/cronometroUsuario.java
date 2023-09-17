@@ -7,6 +7,8 @@ import android.os.SystemClock;
 import android.view.View;
 import android.widget.Chronometer;
 
+import java.util.Locale;
+
 
 public class cronometroUsuario extends AppCompatActivity {
 
@@ -21,9 +23,19 @@ public class cronometroUsuario extends AppCompatActivity {
         setContentView(R.layout.activity_cronometro_usuario);
 
         chronometer = findViewById(R.id.chronometer);
-        chronometer.setFormat("%s");
+        chronometer.setBase(SystemClock.elapsedRealtime());
+        chronometer.setOnChronometerTickListener(new Chronometer.OnChronometerTickListener() {
+            @Override
+            public void onChronometerTick(Chronometer chronometer) {
+                long elapsedMillis = SystemClock.elapsedRealtime() - chronometer.getBase();
+                int hours = (int) (elapsedMillis / 3600000);
+                int minutes = (int) (elapsedMillis - hours * 3600000) / 60000;
+                int seconds = (int) (elapsedMillis - hours * 3600000 - minutes * 60000) / 1000;
+                String time = String.format(Locale.getDefault(), "%02d:%02d:%02d", hours, minutes, seconds);
+                chronometer.setText(time);
+            }
+        });
 
-        // Configura los listeners de los botones
         findViewById(R.id.button5).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
