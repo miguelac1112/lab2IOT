@@ -5,13 +5,13 @@ import com.google.gson.annotations.SerializedName;
    
 public class Name {
 
-   @SerializedName("title")
+
    String title;
 
-   @SerializedName("first")
+
    String first;
 
-   @SerializedName("last")
+
    String last;
 
 

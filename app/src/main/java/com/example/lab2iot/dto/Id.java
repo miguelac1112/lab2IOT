@@ -5,10 +5,10 @@ import com.google.gson.annotations.SerializedName;
    
 public class Id {
 
-   @SerializedName("name")
+
    String name;
 
-   @SerializedName("value")
+
    String value;
 
 

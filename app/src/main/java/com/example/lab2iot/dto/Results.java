@@ -5,40 +5,40 @@ import com.google.gson.annotations.SerializedName;
    
 public class Results {
 
-   @SerializedName("gender")
+
    String gender;
 
-   @SerializedName("name")
+
    Name name;
 
-   @SerializedName("location")
+
    Location location;
 
-   @SerializedName("email")
+
    String email;
 
-   @SerializedName("login")
+
    Login login;
 
-   @SerializedName("dob")
+
    Dob dob;
 
-   @SerializedName("registered")
+
    Registered registered;
 
-   @SerializedName("phone")
+
    String phone;
 
-   @SerializedName("cell")
+
    String cell;
 
-   @SerializedName("id")
+
    Id id;
 
-   @SerializedName("picture")
+
    Picture picture;
 
-   @SerializedName("nat")
+
    String nat;
 
 

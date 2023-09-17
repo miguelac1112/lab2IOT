@@ -5,10 +5,10 @@ import com.google.gson.annotations.SerializedName;
    
 public class Street {
 
-   @SerializedName("number")
+
    int number;
 
-   @SerializedName("name")
+
    String name;
 
 

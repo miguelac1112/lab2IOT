@@ -5,13 +5,13 @@ import com.google.gson.annotations.SerializedName;
    
 public class Picture {
 
-   @SerializedName("large")
+
    String large;
 
-   @SerializedName("medium")
+
    String medium;
 
-   @SerializedName("thumbnail")
+
    String thumbnail;
 
 

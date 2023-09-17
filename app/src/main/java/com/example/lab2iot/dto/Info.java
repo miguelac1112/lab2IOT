@@ -5,16 +5,16 @@ import com.google.gson.annotations.SerializedName;
    
 public class Info {
 
-   @SerializedName("seed")
+
    String seed;
 
-   @SerializedName("results")
+
    int results;
 
-   @SerializedName("page")
+
    int page;
 
-   @SerializedName("version")
+
    String version;
 
 

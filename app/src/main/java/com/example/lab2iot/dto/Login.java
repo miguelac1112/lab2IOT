@@ -5,25 +5,25 @@ import com.google.gson.annotations.SerializedName;
    
 public class Login {
 
-   @SerializedName("uuid")
+
    String uuid;
 
-   @SerializedName("username")
+
    String username;
 
-   @SerializedName("password")
+
    String password;
 
-   @SerializedName("salt")
+
    String salt;
 
-   @SerializedName("md5")
+
    String md5;
 
-   @SerializedName("sha1")
+
    String sha1;
 
-   @SerializedName("sha256")
+
    String sha256;
 
 

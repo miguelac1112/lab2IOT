@@ -5,10 +5,10 @@ import com.google.gson.annotations.SerializedName;
    
 public class Timezone {
 
-   @SerializedName("offset")
+
    String offset;
 
-   @SerializedName("description")
+
    String description;
 
 

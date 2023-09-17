@@ -6,12 +6,9 @@ import com.google.gson.annotations.SerializedName;
    
 public class Profile {
 
-   @SerializedName("results")
+
    List<Results> results;
-
-   @SerializedName("info")
    Info info;
-
 
     public void setResults(List<Results> results) {
         this.results = results;

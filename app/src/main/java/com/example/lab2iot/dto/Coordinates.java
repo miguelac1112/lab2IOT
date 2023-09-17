@@ -5,10 +5,10 @@ import com.google.gson.annotations.SerializedName;
    
 public class Coordinates {
 
-   @SerializedName("latitude")
+
    String latitude;
 
-   @SerializedName("longitude")
+
    String longitude;
 
 

@@ -5,25 +5,25 @@ import com.google.gson.annotations.SerializedName;
    
 public class Location {
 
-   @SerializedName("street")
+
    Street street;
 
-   @SerializedName("city")
+
    String city;
 
-   @SerializedName("state")
+
    String state;
 
-   @SerializedName("country")
+
    String country;
 
-   @SerializedName("postcode")
+
    int postcode;
 
-   @SerializedName("coordinates")
+
    Coordinates coordinates;
 
-   @SerializedName("timezone")
+
    Timezone timezone;
 
 

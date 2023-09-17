@@ -6,10 +6,10 @@ import com.google.gson.annotations.SerializedName;
    
 public class Dob {
 
-   @SerializedName("date")
+
    Date date;
 
-   @SerializedName("age")
+
    int age;
 
 
