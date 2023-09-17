@@ -15,6 +15,8 @@ import com.example.lab2iot.dto.Results;
 import com.example.lab2iot.services.RandomUser;
 import com.google.android.material.textfield.TextInputEditText;
 
+import org.w3c.dom.Text;
+
 import java.util.List;
 
 import retrofit2.Call;
@@ -47,15 +49,18 @@ public class signUp extends AppCompatActivity {
         EditText nombre = findViewById(R.id.etNombre);
         EditText apellido = findViewById(R.id.etApellido);
         TextView usuario = findViewById(R.id.textView7);
+        TextView picture = findViewById(R.id.textView8);
         String nombre1 = nombre.getText().toString();
         String apellido1 = apellido.getText().toString();
         String userName = usuario.getText().toString();
+        String urlPicture = picture.getText().toString();
 
         String nombre_apellido = nombre1+" "+apellido1;
 
         Intent intent = new Intent(this, inicioUsuario.class);
         intent.putExtra("nombre_apellido", nombre_apellido);
         intent.putExtra("userName",userName);
+        intent.putExtra("urlPicture",urlPicture);
         startActivity(intent);
 
     }
@@ -78,6 +83,7 @@ public class signUp extends AppCompatActivity {
                             String correo = results.get(0).getEmail();
                             String contrasenha = results.get(0).getLogin().getPassword();
                             String username = results.get(0).getLogin().getUsername();
+                            String picture = results.get(0).getPicture().getThumbnail();
 
                             TextInputEditText etNombre = findViewById(R.id.etNombre);
                             etNombre.setText(nombre);
@@ -93,6 +99,9 @@ public class signUp extends AppCompatActivity {
 
                             TextView userName = findViewById(R.id.textView7);
                             userName.setText(username);
+
+                            TextView urlPicture = findViewById(R.id.textView8);
+                            urlPicture.setText(picture);
                         }
                     } else {
                         Log.d("msg-Error", "La lista de resultados está vacía o nula.");
