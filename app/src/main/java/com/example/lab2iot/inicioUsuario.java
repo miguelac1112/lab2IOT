@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import com.bumptech.glide.Glide;
@@ -31,5 +32,15 @@ public class inicioUsuario extends AppCompatActivity {
                 .load(urlPicture)
                 .placeholder(R.drawable.google_icon)
                 .into(imageView);
+    }
+
+    public void cronometro(View view){
+        Intent intent = new Intent(this, cronometroUsuario.class);
+        startActivity(intent);
+    }
+
+    public void contador(View view){
+        Intent intent = new Intent(this, contadorUsuario.class);
+        startActivity(intent);
     }
 }
