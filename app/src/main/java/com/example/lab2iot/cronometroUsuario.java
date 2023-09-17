@@ -1,21 +1,24 @@
 package com.example.lab2iot;
 
-import androidx.appcompat.app.AppCompatActivity;
-
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.view.View;
 import android.widget.Chronometer;
 
-import java.util.Locale;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.work.OneTimeWorkRequest;
+import androidx.work.WorkManager;
 
+import com.example.lab2iot.worker.CronometroWorker;
 
 public class cronometroUsuario extends AppCompatActivity {
-
 
     private Chronometer chronometer;
     private long pauseOffset;
     private boolean running;
+    private SharedPreferences prefs;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,12 +32,14 @@ public class cronometroUsuario extends AppCompatActivity {
             public void onChronometerTick(Chronometer chronometer) {
                 long elapsedMillis = SystemClock.elapsedRealtime() - chronometer.getBase();
                 int hours = (int) (elapsedMillis / 3600000);
-                int minutes = (int) (elapsedMillis - hours * 3600000) / 60000;
-                int seconds = (int) (elapsedMillis - hours * 3600000 - minutes * 60000) / 1000;
-                String time = String.format(Locale.getDefault(), "%02d:%02d:%02d", hours, minutes, seconds);
+                int minutes = (int) ((elapsedMillis / 60000) % 60);
+                int seconds = (int) ((elapsedMillis / 1000) % 60);
+                String time = String.format("%02d:%02d:%02d", hours, minutes, seconds);
                 chronometer.setText(time);
             }
         });
+
+        prefs = getSharedPreferences("CronometroPrefs", Context.MODE_PRIVATE);
 
         findViewById(R.id.button5).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -77,6 +82,12 @@ public class cronometroUsuario extends AppCompatActivity {
             chronometer.setBase(SystemClock.elapsedRealtime() - pauseOffset);
             chronometer.start();
             running = true;
+
+            // Inicia el trabajo del CronometroWorker
+            OneTimeWorkRequest workRequest = new OneTimeWorkRequest.Builder(CronometroWorker.class).build();
+            WorkManager.getInstance(this).enqueue(workRequest);
+            prefs.edit().putBoolean("isRunning", true).apply();
+            prefs.edit().putLong("baseTime", chronometer.getBase()).apply();
         }
     }
 
@@ -85,6 +96,10 @@ public class cronometroUsuario extends AppCompatActivity {
             chronometer.stop();
             pauseOffset = SystemClock.elapsedRealtime() - chronometer.getBase();
             running = false;
+
+            // Detiene el trabajo del CronometroWorker
+            WorkManager.getInstance(this).cancelAllWork();
+            prefs.edit().putBoolean("isRunning", false).apply();
         }
     }
 
@@ -93,6 +108,11 @@ public class cronometroUsuario extends AppCompatActivity {
             chronometer.setBase(SystemClock.elapsedRealtime() - pauseOffset);
             chronometer.start();
             running = true;
+
+            // Inicia el trabajo del CronometroWorker
+            OneTimeWorkRequest workRequest = new OneTimeWorkRequest.Builder(CronometroWorker.class).build();
+            WorkManager.getInstance(this).enqueue(workRequest);
+            prefs.edit().putBoolean("isRunning", true).apply();
         }
     }
 
@@ -100,5 +120,10 @@ public class cronometroUsuario extends AppCompatActivity {
         chronometer.setBase(SystemClock.elapsedRealtime());
         pauseOffset = 0;
         running = false;
+
+        // Detiene el trabajo del CronometroWorker
+        WorkManager.getInstance(this).cancelAllWork();
+        prefs.edit().putBoolean("isRunning", false).apply();
     }
 }
+
