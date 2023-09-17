@@ -2,8 +2,12 @@ package com.example.lab2iot;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.TextView;
 
 import com.example.lab2iot.databinding.ActivityMainBinding;
 import com.example.lab2iot.dto.Profile;
@@ -38,6 +42,24 @@ public class signUp extends AppCompatActivity {
         fetchProfileFromWs();
     }
 
+    public void irAInicio(View view) {
+
+        EditText nombre = findViewById(R.id.etNombre);
+        EditText apellido = findViewById(R.id.etApellido);
+        TextView usuario = findViewById(R.id.textView7);
+        String nombre1 = nombre.getText().toString();
+        String apellido1 = apellido.getText().toString();
+        String userName = usuario.getText().toString();
+
+        String nombre_apellido = nombre1+" "+apellido1;
+
+        Intent intent = new Intent(this, inicioUsuario.class);
+        intent.putExtra("nombre_apellido", nombre_apellido);
+        intent.putExtra("userName",userName);
+        startActivity(intent);
+
+    }
+
     public void fetchProfileFromWs(){
         randomUser.getResults().enqueue(new Callback<Profile>(){
             @Override
@@ -55,6 +77,7 @@ public class signUp extends AppCompatActivity {
                             String apellido = results.get(0).getName().getLast();
                             String correo = results.get(0).getEmail();
                             String contrasenha = results.get(0).getLogin().getPassword();
+                            String username = results.get(0).getLogin().getUsername();
 
                             TextInputEditText etNombre = findViewById(R.id.etNombre);
                             etNombre.setText(nombre);
@@ -67,6 +90,9 @@ public class signUp extends AppCompatActivity {
 
                             TextInputEditText etContraseña = findViewById(R.id.etContraseña);
                             etContraseña.setText(contrasenha);
+
+                            TextView userName = findViewById(R.id.textView7);
+                            userName.setText(username);
                         }
                     } else {
                         Log.d("msg-Error", "La lista de resultados está vacía o nula.");
